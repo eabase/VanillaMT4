@@ -36,7 +36,7 @@ def create_symlinked_clone(target, n):
     for sym in dirs_sym:
         new_path = os.path.join(cwd, new_dir, sym)
         target_path = os.path.join(cwd, target, sym)
-        win32file.CreateSymbolicLink(new_path, target_path, 1)
+        symlink(new_path, target_path)
         time.sleep(0.5)
     #copy files
     for f in files_copy:
@@ -54,19 +54,41 @@ def create_symlinked_clone(target, n):
         name=f'LAUNCH-{new_dir}'
     )
     
+def symlink(new_path, target_path):
+    win32file.CreateSymbolicLink(new_path, target_path, 1)
 
-def clone(n):
+def fix_symlinks():
+    cwd = os.getcwd()
+    mt_dirs = [i for i in os.listdir(cwd) is os.path.isdir(i) and is_mt4_dir(i)]
+    for d in mt_dirs:
+        for folder in dirs_sym:
+            symlink(
+                os.path.join(cwd, d, folder),
+                os.path.join(cwd, 'MT4', folder),
+            )
+
+
+def clone(*args):
     if not elevate.is_admin():
         elevate.elevate_privilege()
         return None
     if is_mt4_dir(os.getcwd()) or not is_mt4_dir(os.path.join(os.getcwd(), 'MT4')):
         raise Exception('Run from parent dir.')
+    n = None
+    while 1:
+        try:
+            n = int(input('Enter total sum of clone terminals for this directory.\n>'))
+            if not 0 < n < 100:
+                raise ValueError
+        except ValueError:
+            print('Invalid selection')
+            continue
+        break
     master_src = None
     clones = []
     dirs = list(d for d in os.listdir() if os.path.isdir(d) and not d.startswith('.') and not d.startswith('__'))
     print(dirs)
     for f in dirs:
-        print(f)
         directory: str = f
         if is_mt4_dir(directory):
             if master_src is None and 'clone' not in directory.casefold():

@@ -27,3 +27,7 @@ Operations:
     Relocating entire MT4 directory and all clones to a different location/computer/VPS:
         1. Copy the parent directory and all of its contents to the target location
         2. Run the setup.exe program and select the option to Refresh Launch Shortcuts
+
+
+!!! IMPORANT !!!
+DO NOT RENAME THE DIRECTORIES

@@ -16,13 +16,23 @@ ASCII_ART = (
     '*********************************************************************************************\n' 
 )
 
+def launchall():
+    cwd = os.getcwd()
+    for f in os.listdir(cwd):
+        if os.path.isdir(f) and clone.is_mt4_dir(f):
+            portable.launch_terminal(os.path.join(cwd, f))
+
 menu = {
-    '1': {
-        'desc': 'Clone and Symlink',
-        'func': clone.clone,
+    '1':{
+        'desc': 'Launch all terminals in this directory. (Release the clones!)',
+        'func': launchall,
     },
     '2': {
-        'desc': 'Refresh Launch Shortcuts',
+        'desc': 'Clone and Symlink (Elevates to Admin)',
+        'func': clone.clone,
+    },
+    '3': {
+        'desc': 'Refresh Launch Shortcuts / Repair Symlinks',
         'func': portable.refresh,
     },
 }
@@ -68,20 +78,8 @@ def main():
     if not action:
         exit('No actions were performed')
     print(f'Proceeding with <<{menu[action]["desc"]}>>')
-    n = None
-    if action == '1':
-        if clone.is_admin():
-            while 1:
-                try:
-                    n = int(input('Enter total sum of clone terminals for this directory.\n>'))
-                    if not 0 < n < 100:
-                        raise ValueError
-                except ValueError:
-                    print('Invalid selection')
-                    continue
-                break
-
-    menu[action]['func'](n)
+    
+    menu[action]['func']()
     
  
 

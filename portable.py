@@ -40,7 +40,10 @@ def refresh(*args):
                 return f
         return None
     for d in dirs:
-        create_launch_shortcut(d, lnk_file(d))
+        create_launch_shortcut(d, lnk_file(d)[:-4])
+    clone.fix_symlinks()
+    
+
 
 
 def launch_terminal(directory):

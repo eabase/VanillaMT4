@@ -5,13 +5,14 @@ import shutil
 import time
 import clone
 
+
 def create_launch_shortcut(directory: str, name='LAUNCH-MT4'):
     """
     Creates the shortcut neccessary to launch MT4 in portable mode
     """
     if 'clone' not in directory.casefold():
         shortcut_locations = (
-            directory, 
+            directory,
             os.path.join(os.environ["HOMEPATH"], "Desktop"),)
     else:
         shortcut_locations = (directory,)
@@ -23,17 +24,20 @@ def create_launch_shortcut(directory: str, name='LAUNCH-MT4'):
         print(f'creating shortcut for {location}')
         path = os.path.join(location, name)
         shell = Dispatch('WScript.Shell')
-        shortcut = shell.CreateShortCut(path) 
+        shortcut = shell.CreateShortCut(path)
         shortcut.Targetpath = target
         shortcut.Arguments = '/portable'
         shortcut.WorkingDirectory = directory
         shortcut.IconLocation = target
         shortcut.save()
 
+
 def refresh(*args):
     print('refresh!')
     cwd = os.getcwd()
-    dirs = [os.path.join(cwd, a) for a in os.listdir(cwd) if os.path.isdir(a) and clone.is_mt4_dir(a)]
+    dirs = [os.path.join(cwd, a) for a in os.listdir(
+        cwd) if os.path.isdir(a) and clone.is_mt4_dir(a)]
+
     def lnk_file(d):
         for f in os.listdir(d):
             if f.endswith('.lnk'):
@@ -42,8 +46,6 @@ def refresh(*args):
     for d in dirs:
         create_launch_shortcut(d, lnk_file(d)[:-4])
     clone.fix_symlinks()
-    
-
 
 
 def launch_terminal(directory):
@@ -54,13 +56,14 @@ def launch_terminal(directory):
     program = os.path.join(directory, 'terminal.exe') + ' /portable'
     subprocess.Popen(program)
 
+
 def main(*args):
     directory = os.path.join(os.getcwd(), 'MT4')
     print('Creating portable shortcuts')
     create_launch_shortcut(directory)
     print('launching terminal for setup')
     launch_terminal(directory)
-    
+
 
 if __name__ == '__main__':
     # main()

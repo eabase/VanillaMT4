@@ -3,21 +3,24 @@ from win32com.client import Dispatch
 import win32file
 import time
 import shutil
-#locals
+# locals
 import elevate
 import portable
 
-files_copy = ['metaeditor.exe', 'terminal.exe',]
-dirs_copy  = ['logs', 'config', 'profiles', 'tester',]
-dirs_sym   = ['MQL4', 'history', 'templates', 'Sounds']
+files_copy = ['metaeditor.exe', 'terminal.exe', ]
+dirs_copy = ['logs', 'config', 'profiles', 'tester', ]
+dirs_sym = ['MQL4', 'history', 'templates', 'Sounds']
+
 
 def is_admin():
     return elevate.is_admin()
+
 
 def is_mt4_dir(directory):
     """Returns true if the folder is a MT dir"""
     # print(os.listdir(directory))
     return 'terminal.exe' in os.listdir(directory)
+
 
 def create_symlinked_clone(target, n):
     """
@@ -27,39 +30,41 @@ def create_symlinked_clone(target, n):
     """
     cwd = os.getcwd()
     new_dir = f'{target}-CLONE-{n}'
- 
+
     if not os.path.exists(new_dir):
         os.makedirs(new_dir)
         time.sleep(1)
-       
-    #symlink directories
+
+    # symlink directories
     for sym in dirs_sym:
         new_path = os.path.join(cwd, new_dir, sym)
         target_path = os.path.join(cwd, target, sym)
         symlink(new_path, target_path)
         time.sleep(0.5)
-    #copy files
+    # copy files
     for f in files_copy:
         shutil.copy(
             os.path.join(cwd, target, f),
             os.path.join(cwd, new_dir, f))
-    #copy dirs
+    # copy dirs
     for f in dirs_copy:
         shutil.copytree(
             os.path.join(cwd, target, f),
-            os.path.join(cwd, new_dir, f)
-    )
+            os.path.join(cwd, new_dir, f))
+
     portable.create_launch_shortcut(
         directory=os.path.join(cwd, new_dir),
-        name=f'LAUNCH-{new_dir}'
-    )
-    
+        name=f'LAUNCH-{new_dir}')
+
+
 def symlink(new_path, target_path):
     win32file.CreateSymbolicLink(new_path, target_path, 1)
 
+
 def fix_symlinks():
     cwd = os.getcwd()
-    mt_dirs = [i for i in os.listdir(cwd) is os.path.isdir(i) and is_mt4_dir(i)]
+    mt_dirs = [i for i in os.listdir(
+        cwd) is os.path.isdir(i) and is_mt4_dir(i)]
     for d in mt_dirs:
         for folder in dirs_sym:
             symlink(
@@ -77,7 +82,8 @@ def clone(*args):
     n = None
     while 1:
         try:
-            n = int(input('Enter total sum of clone terminals for this directory.\n>'))
+            n = int(
+                input('Enter total sum of clone terminals for this directory.\n>'))
             if not 0 < n < 100:
                 raise ValueError
         except ValueError:
@@ -86,7 +92,8 @@ def clone(*args):
         break
     master_src = None
     clones = []
-    dirs = list(d for d in os.listdir() if os.path.isdir(d) and not d.startswith('.') and not d.startswith('__'))
+    dirs = list(d for d in os.listdir() if os.path.isdir(
+        d) and not d.startswith('.') and not d.startswith('__'))
     print(dirs)
     for f in dirs:
         directory: str = f
@@ -100,4 +107,3 @@ def clone(*args):
 
     for i in range(len(clones) + 1, n + 1):
         create_symlinked_clone(master_src, i)
-

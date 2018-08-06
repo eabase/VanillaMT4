@@ -13,8 +13,9 @@ ASCII_ART = (
     '   \$$ $$ |  $$$$$$$| $$  | $$| $$| $$| $$|  $$$$$$$        | $$ \$$$| $$   | $$         | $$\n'
     '    \$$$   \$$    $$| $$  | $$| $$| $$| $$ \$$    $$        | $$  \$ | $$   | $$         | $$\n'
     '     \$     \$$$$$$$ \$$   \$$ \$$ \$$ \$$  \$$$$$$$         \$$      \$$    \$$          \$$\n\n'
-    '*********************************************************************************************\n' 
+    '*********************************************************************************************\n'
 )
+
 
 def launchall():
     cwd = os.getcwd()
@@ -22,8 +23,9 @@ def launchall():
         if os.path.isdir(f) and clone.is_mt4_dir(f):
             portable.launch_terminal(os.path.join(cwd, f))
 
+
 menu = {
-    '1':{
+    '1': {
         'desc': 'Launch all terminals in this directory. (Release the clones!)',
         'func': launchall,
     },
@@ -37,12 +39,15 @@ menu = {
     },
 }
 
+
 def print_menu():
-    for k,v in menu.items():
+    for k, v in menu.items():
         print(f'{k}: {v["desc"]}')
+
 
 def is_init():
     return not os.path.exists('MT4')
+
 
 def unpack():
     print('Unzipping archive. please standby...')
@@ -55,6 +60,7 @@ def unpack():
         return True
     raise Exception('Error unpacking archive. Did you remove or rename it?')
 
+
 def main():
     print(ASCII_ART)
 
@@ -62,10 +68,9 @@ def main():
         if unpack():
             portable.main()
         input('Please wait for the terminal to load and then setup your accounts.\n'
-            '\n........this may take a while during the initial launch.......Be patient.'
-            '\nPress Enter to exit')
+              '\n........this may take a while during the initial launch.......Be patient.'
+              '\nPress Enter to exit')
         exit()
-
 
     print_menu()
     action = None
@@ -78,10 +83,9 @@ def main():
     if not action:
         exit('No actions were performed')
     print(f'Proceeding with <<{menu[action]["desc"]}>>')
-    
+
     menu[action]['func']()
-    
- 
+
 
 if __name__ == '__main__':
     main()

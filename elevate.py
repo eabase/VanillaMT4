@@ -34,7 +34,7 @@ def elevate_privilege(cmd_line_seq: list=None, wait: bool=True):
     if wait:
         procHandle = procInfo['hProcess']
         _ = win32event.WaitForSingleObject(procHandle, win32event.INFINITE)
-        return_code  = win32process.GetExitCodeProcess(procHandle)
+        return_code = win32process.GetExitCodeProcess(procHandle)
         print("Process handle {} returned code {}".format(procHandle, return_code))
     else:
         return_code = None

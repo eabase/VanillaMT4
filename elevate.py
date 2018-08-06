@@ -23,7 +23,7 @@ def elevate_privilege(cmd_line_seq: list=None, wait: bool=True):
         raise ValueError
     script_to_run = f'"{cmd_line_seq[0]}"'
     params = " ".join(f'"{x}"' for x in cmd_line_seq[1:])
-    input(f'file = {script_to_run}\nparams = {params}\nEnter to continue...')
+    # input(f'file = {script_to_run}\nparams = {params}\nEnter to continue...')
     procInfo = ShellExecuteEx(
         nShow=win32con.SW_SHOWNORMAL,
         fMask=shellcon.SEE_MASK_NOCLOSEPROCESS,
@@ -39,11 +39,6 @@ def elevate_privilege(cmd_line_seq: list=None, wait: bool=True):
     else:
         return_code = None
     return return_code
-
-# def runas_admin(func):
-#     def inner(*args, **kwargs):
-#         if not is_admin():
-#             print('This action requires elevated permissions... Launching admin console.')
 
 
 def main():

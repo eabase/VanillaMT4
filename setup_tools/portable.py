@@ -3,7 +3,7 @@ import os
 import subprocess
 import shutil
 import time
-import clone
+from setup_tools import clone
 
 
 def create_launch_shortcut(directory: str, name='LAUNCH-MT4'):
@@ -44,6 +44,7 @@ def refresh(*args):
                 return f
         return None
     for d in dirs:
+        print(d)
         create_launch_shortcut(d, lnk_file(d)[:-4])
     clone.fix_symlinks()
 

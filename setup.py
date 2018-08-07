@@ -1,7 +1,7 @@
-import clone
-import portable
 import os
 import time
+
+from setup_tools import clone, portable
 
 ASCII_ART = (
     ' __     __                     __  __  __                    __       __  ________  __    __ \n'
@@ -52,7 +52,7 @@ def is_init():
 def unpack():
     print('Unzipping archive. please standby...')
     import zipfile
-    zip_ref = zipfile.ZipFile('RUN_SETUP.zip', 'r')
+    zip_ref = zipfile.ZipFile(os.path.join('files', 'RUN_SETUP.zip'), 'r')
     zip_ref.extractall(os.getcwd())
     zip_ref.close()
     time.sleep(5)

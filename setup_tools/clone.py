@@ -4,8 +4,7 @@ import win32file
 import time
 import shutil
 # locals
-import elevate
-import portable
+from setup_tools import elevate, portable
 
 files_copy = ['metaeditor.exe', 'terminal.exe', ]
 dirs_copy = ['logs', 'config', 'profiles', 'tester', ]
@@ -92,8 +91,10 @@ def clone(*args):
         break
     master_src = None
     clones = []
-    dirs = list(d for d in os.listdir() if os.path.isdir(
-        d) and not d.startswith('.') and not d.startswith('__'))
+    dirs = list(
+        d for d in os.listdir() 
+            if os.path.isdir(d) and not d.startswith('.') and not d.startswith('__')
+    )
     print(dirs)
     for f in dirs:
         directory: str = f

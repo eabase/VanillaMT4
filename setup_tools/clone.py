@@ -7,7 +7,7 @@ import win32file
 # locals
 from setup_tools import elevate, portable
 
-files_copy  = ['metaeditor.exe', 'terminal.exe', ]
+files_copy  = ['metaeditor.exe', 'terminal.exe', 'terminal.ico' ]
 dirs_copy   = ['logs', 'config', 'profiles', 'tester', ]
 dirs_sym    = ['MQL4', 'history', 'templates', 'Sounds']
 

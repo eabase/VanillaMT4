@@ -26,4 +26,4 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=True , icon='files\\settings.ico')
+          console=True , icon='files\\terminal.ico')

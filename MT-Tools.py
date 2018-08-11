@@ -32,7 +32,7 @@ menu = {
         'func': clone.clone,
     },
     '3': {
-        'desc': 'Refresh Launch Shortcuts / Repair Symlinks',
+        'desc': 'Repair Launch Shortcuts / Symlinks',
         'func': portable.refresh,
     },
 }
@@ -58,6 +58,14 @@ def unpack():
         return True
     raise Exception('Error unpacking archive. Did you remove or rename it?')
 
+def setup_update():
+    if is_init():
+        if unpack():
+            portable.main()
+        input('\nPlease wait for the terminal to load and then setup your accounts.'
+              '\n...this may take a while during the initial launch. Wait for it.'
+              '\nPress Enter to exit')
+        exit()
 
 def main():
     args = sys.argv[1:]
@@ -66,18 +74,10 @@ def main():
         exit('Launching all terminals...')
 
     print(ASCII_ART)
-
-    if is_init():
-        if unpack():
-            portable.main()
-        input('Please wait for the terminal to load and then setup your accounts.\n'
-              '\n........this may take a while during the initial launch.......Be patient.'
-              '\nPress Enter to exit')
-        exit()
-
+    setup_update()
     print_menu()
-    action = None
 
+    action = None
     while True:
         action = input('Please enter selection or press Enter to quit\n>')
         if action and action not in menu:

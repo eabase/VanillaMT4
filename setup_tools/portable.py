@@ -65,6 +65,8 @@ def refresh(*args):
         print(d)
         create_launch_shortcut(d, lnk_file(d)[:-4])
     clone.fix_symlinks()
+    print('creating launch-all shortcut')
+    create_launchall_shortcut(os.getcwd())
 
 
 def launch_terminal(directory):

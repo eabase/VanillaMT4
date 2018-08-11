@@ -1,7 +1,7 @@
 import os
 import time
 import sys
-from setup_tools import clone, portable
+from setup_tools import clone, portable, elevate
 
 ASCII_ART = (
     ' __     __                     __  __  __                    __       __  ________  __    __ \n'
@@ -89,7 +89,11 @@ def main():
         exit('No actions were performed')
     print(f'Proceeding with <<{menu[action]["desc"]}>>')
 
+    if action in ['2', '3'] and not elevate.is_admin():
+        elevate.elevate_privilege()
+        return None
     menu[action]['func']()
+    # ex = input("Press Enter to exit")
 
 
 if __name__ == '__main__':

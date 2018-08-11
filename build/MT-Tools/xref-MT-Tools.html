@@ -315,6 +315,7 @@ imports:
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#setup_tools">setup_tools</a>
  &#8226;   <a href="#setup_tools.clone">setup_tools.clone</a>
+ &#8226;   <a href="#setup_tools.elevate">setup_tools.elevate</a>
  &#8226;   <a href="#setup_tools.portable">setup_tools.portable</a>
  &#8226;   <a href="#shlex">shlex</a>
  &#8226;   <a href="#shutil">shutil</a>
@@ -412,7 +413,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#MT-Tools.py">MT-Tools.py</a>
- &#8226;   <a href="#copy">copy</a>
+ &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
 
   </div>
@@ -1520,6 +1521,17 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="clone"></a>
+  <a target="code" href="" type="text/plain"><tt>clone</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#setup_tools.portable">setup_tools.portable</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="cmd"></a>
   <a target="code" href="///C:/users/user/anaconda3/envs/play/lib/cmd.py" type="text/plain"><tt>cmd</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -1847,8 +1859,8 @@ imported by:
   <a target="code" href="///C:/users/user/anaconda3/envs/play/lib/copy.py" type="text/plain"><tt>copy</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'org.python'">'org.python'</a>
- &#8226;   <a href="#copyreg">copyreg</a>
+    <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -2143,6 +2155,17 @@ imported by:
  &#8226;   <a href="#socketserver">socketserver</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#zipfile">zipfile</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="elevate"></a>
+  <a target="code" href="" type="text/plain"><tt>elevate</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#setup_tools.clone">setup_tools.clone</a>
 
   </div>
 
@@ -6388,7 +6411,7 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#MT-Tools.py">MT-Tools.py</a>
- &#8226;   <a href="#pickle">pickle</a>
+ &#8226;   <a href="#copy">copy</a>
 
   </div>
 
@@ -6523,7 +6546,8 @@ imported by:
   <a target="code" href="///C:/users/user/anaconda3/envs/play/lib/pickle.py" type="text/plain"><tt>pickle</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#_compat_pickle">_compat_pickle</a>
+    <a href="#'org.python'">'org.python'</a>
+ &#8226;   <a href="#_compat_pickle">_compat_pickle</a>
  &#8226;   <a href="#_pickle">_pickle</a>
  &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#codecs">codecs</a>
@@ -6532,7 +6556,6 @@ imports:
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#itertools">itertools</a>
- &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#struct">struct</a>
@@ -6632,6 +6655,17 @@ imports:
 imported by:
     <a href="#MT-Tools.py">MT-Tools.py</a>
  &#8226;   <a href="#platform">platform</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="portable"></a>
+  <a target="code" href="" type="text/plain"><tt>portable</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#setup_tools.clone">setup_tools.clone</a>
 
   </div>
 
@@ -7302,7 +7336,9 @@ imported by:
   <a target="code" href="///C:/Users/user/Desktop/MQLDIR/setup_tools/clone.py" type="text/plain"><tt>setup_tools.clone</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#os">os</a>
+    <a href="#elevate">elevate</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#portable">portable</a>
  &#8226;   <a href="#setup_tools">setup_tools</a>
  &#8226;   <a href="#setup_tools.elevate">setup_tools.elevate</a>
  &#8226;   <a href="#setup_tools.portable">setup_tools.portable</a>
@@ -7343,7 +7379,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#setup_tools">setup_tools</a>
+    <a href="#MT-Tools.py">MT-Tools.py</a>
+ &#8226;   <a href="#setup_tools">setup_tools</a>
  &#8226;   <a href="#setup_tools.clone">setup_tools.clone</a>
 
   </div>
@@ -7355,7 +7392,8 @@ imported by:
   <a target="code" href="///C:/Users/user/Desktop/MQLDIR/setup_tools/portable.py" type="text/plain"><tt>setup_tools.portable</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#os">os</a>
+    <a href="#clone">clone</a>
+ &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#setup_tools">setup_tools</a>
  &#8226;   <a href="#setup_tools.clone">setup_tools.clone</a>
  &#8226;   <a href="#shutil">shutil</a>

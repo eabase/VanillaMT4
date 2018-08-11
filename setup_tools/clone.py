@@ -5,7 +5,10 @@ from win32com.client import Dispatch
 import win32file
 
 # locals
-from setup_tools import elevate, portable
+try:
+    from setup_tools import elevate, portable
+except:
+    import elevate, portable
 
 files_copy  = ['metaeditor.exe', 'terminal.exe', 'terminal.ico' ]
 dirs_copy   = ['logs', 'config', 'profiles', 'tester', ]
@@ -62,21 +65,21 @@ def symlink(new_path, target_path):
 
 
 def fix_symlinks():
-    cwd = os.getcwd()
-    mt_dirs = [i for i in os.listdir(
-        cwd) is os.path.isdir(i) and is_mt4_dir(i)]
-    for d in mt_dirs:
-        for folder in dirs_sym:
-            symlink(
-                os.path.join(cwd, d, folder),
-                os.path.join(cwd, 'MT4', folder),
-            )
+    try:
+        cwd = os.getcwd()
+        mt_dirs = [i for i in os.listdir(cwd) if os.path.isdir(i) and is_mt4_dir(i)]
+        for d in mt_dirs:
+            for folder in dirs_sym:
+                symlink(
+                    os.path.join(cwd, d, folder),
+                    os.path.join(cwd, 'MT4', folder),
+                )
+    except:
+        pass
 
 
 def clone(*args):
-    if not elevate.is_admin():
-        elevate.elevate_privilege()
-        return None
+    
     if is_mt4_dir(os.getcwd()) or not is_mt4_dir(os.path.join(os.getcwd(), 'MT4')):
         raise Exception('Run from parent dir.')
     n = None

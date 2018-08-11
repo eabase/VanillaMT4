@@ -1,1 +1,9 @@
+v0.0.2 - 
+    - Updated terminal to build 1126 and metaeditor to build 1861 (June '18 update)
+    - Changed name of setup.exe to MT-Tools.exe
+    - Launchers in terminal directories are now prefixed with the machine name for launching on multiple machines from one synced cloud-drive
+    - A launch-all .lnk file is now included in the main MT4 parent directory to launch all terminals without directly invoking the script and selecting the option. 
+    - Fixed missing OEM terminal icons
+
 v0.0.1 Initial release. 
+

@@ -1,10 +1,28 @@
-from win32com.client import Dispatch
 import os
 import subprocess
 import shutil
 import time
+from win32com.client import Dispatch
+
 from setup_tools import clone
 
+
+def create_launchall_shortcut(directory: str, name='LAUNCH-ALL-TERMINALS'):
+    """
+    Creates the shortcut neccessary to launch MT4 in portable mode
+    """
+    print(f'creating shortcut for {directory}')
+
+    name = f"{name}.lnk"
+    target = os.path.join(directory, 'MT-Tools.exe')
+    path = os.path.join(directory, name)
+    shell = Dispatch('WScript.Shell')
+    shortcut = shell.CreateShortCut(path)
+    shortcut.Targetpath = target
+    shortcut.Arguments = '--launchall'
+    shortcut.WorkingDirectory = directory
+    shortcut.IconLocation = target
+    shortcut.save()
 
 def create_launch_shortcut(directory: str, name='LAUNCH-MT4'):
     """
@@ -17,7 +35,7 @@ def create_launch_shortcut(directory: str, name='LAUNCH-MT4'):
     else:
         shortcut_locations = (directory,)
 
-    name = f"{name}.lnk"
+    name = f"{os.getenv('COMPUTERNAME')}-{name}.lnk"
     target = os.path.join(directory, 'terminal.exe')
 
     for location in shortcut_locations:
@@ -62,6 +80,8 @@ def main(*args):
     directory = os.path.join(os.getcwd(), 'MT4')
     print('Creating portable shortcuts')
     create_launch_shortcut(directory)
+    print('creating launch-all shortcut')
+    create_launchall_shortcut(os.getcwd())
     print('launching terminal for setup')
     launch_terminal(directory)
 

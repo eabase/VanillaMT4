@@ -1,14 +1,15 @@
 import os
-from win32com.client import Dispatch
-import win32file
 import time
 import shutil
+from win32com.client import Dispatch
+import win32file
+
 # locals
 from setup_tools import elevate, portable
 
-files_copy = ['metaeditor.exe', 'terminal.exe', ]
-dirs_copy = ['logs', 'config', 'profiles', 'tester', ]
-dirs_sym = ['MQL4', 'history', 'templates', 'Sounds']
+files_copy  = ['metaeditor.exe', 'terminal.exe', ]
+dirs_copy   = ['logs', 'config', 'profiles', 'tester', ]
+dirs_sym    = ['MQL4', 'history', 'templates', 'Sounds']
 
 
 def is_admin():
